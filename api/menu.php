@@ -32,7 +32,7 @@ switch ($accionSolicitada) {
 
         if ($idCategoria) {
             $consulta = $conexion->prepare(
-                "SELECT p.id, p.nombre, p.descripcion, p.precio, p.url_imagen,
+                "SELECT p.id, p.nombre, p.descripcion, p.precio,
                         c.nombre   AS nombre_categoria,
                         c.orden_visual AS orden_categoria
                  FROM platos p
@@ -44,7 +44,7 @@ switch ($accionSolicitada) {
             $consulta->execute([$idCategoria]);
         } else {
             $consulta = $conexion->query(
-                "SELECT p.id, p.nombre, p.descripcion, p.precio, p.url_imagen,
+                "SELECT p.id, p.nombre, p.descripcion, p.precio,
                         c.id       AS id_categoria,
                         c.nombre   AS nombre_categoria
                  FROM platos p

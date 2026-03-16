@@ -1,11 +1,9 @@
-// ══════════════════════════════════════════════════════
-//  EL ABALÓN — SCRIPT PRINCIPAL
-//  Todo en español: variables, funciones, comentarios
-// ══════════════════════════════════════════════════════
+
+// variables, funciones, comentarios
 
 'use strict';
 
-/* ─── RUTAS DE LA API ────────────────────────────── */
+/* RUTAS DE LA API*/
 const RUTAS_API = {
   menu:           'api/menu.php',
   reservas:       'api/reservas.php',
@@ -15,7 +13,7 @@ const RUTAS_API = {
 
 const COSTO_DELIVERY = 5.00;
 
-/* ─── ESTADO GLOBAL DE LA APLICACION ────────────── */
+/* ESTADO GLOBAL DE LA APLICACION */
 const estadoApp = {
   listaCategorias:    [],
   listaPlatos:        [],
@@ -952,5 +950,5 @@ obtenerElemento('botonAceptarReserva').addEventListener('click', () => {
   mostrarNotificacion('Reserva guardada con exito. Hasta pronto!');
 });
 
-/* ─── ARRANCAR LA APLICACION ─────────────────────── */
+/* ARRANCAR LA APLICACION  */
 inicializarAplicacion();
