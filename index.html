@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Abalón — Restaurante Marisquería</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       BARRA DE NAVEGACION
+  ══════════════════════════════════════════ -->
+  <header class="barra-navegacion">
+    <div class="barra-navegacion__logo">
+      <span class="logo-texto">El Abalón</span>
+      <span class="logo-subtitulo">Restaurante Marisquería</span>
+    </div>
+    <nav class="barra-navegacion__pestanas">
+      <button class="boton-pestana activo" data-seccion="menu">Carta</button>
+      <button class="boton-pestana" data-seccion="reservas">Reservas</button>
+    </nav>
+    <button class="boton-carrito" id="botonCarrito">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="contador-carrito" id="contadorCarrito">0</span>
+    </button>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       SECCION: CARTA / MENU
+  ══════════════════════════════════════════ -->
+  <section class="seccion" id="seccionMenu">
+    <div class="cabecera-seccion">
+      <h1>Nuestra Carta</h1>
+      <p>Selecciona el plato de tu preferencia</p>
+    </div>
+    <div class="grilla-platos" id="grillaDePlatos">
+      <!-- Generado por script.js -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCION: RESERVAS
+  ══════════════════════════════════════════ -->
+  <section class="seccion oculto" id="seccionReservas">
+    <div class="cabecera-seccion">
+      <h1>Reservas</h1>
+      <p>Reserva tu mesa con anticipación</p>
+    </div>
+    <div class="contenedor-boton-reserva">
+      <button class="boton-principal" id="botonAbrirReserva">Hacer una Reserva</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: DETALLE DE PLATO
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalDetallePlato">
+    <div class="modal modal--plato">
+      <button class="modal__cerrar" id="cerrarModalPlato">X</button>
+
+      <div class="modal-plato-superior">
+        <img id="imagenModalPlato" src="" alt="" />
+        <div class="modal-plato-informacion">
+          <div class="modal-plato-categoria" id="categoriaModalPlato"></div>
+          <h2 id="nombreModalPlato"></h2>
+          <p id="descripcionModalPlato"></p>
+          <div class="modal-plato-precio">S/ <span id="precioModalPlato"></span></div>
+          <div class="fila-cantidad-plato">
+            <span>Cantidad de platos:</span>
+            <div class="control-cantidad">
+              <button class="boton-cantidad" id="disminuirCantidadPlato">-</button>
+              <span id="valorCantidadPlato">1</span>
+              <button class="boton-cantidad" id="aumentarCantidadPlato">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="titulo-subseccion">Agregar una gaseosa personal</div>
+      <p class="subtitulo-subseccion">Puedes agregar hasta <strong id="cantidadMaximaBebidas">2</strong> bebidas en total.</p>
+
+      <div class="lista-bebidas" id="listaDeBebidas">
+        <!-- Generado por script.js -->
+      </div>
+
+      <div class="titulo-subseccion" style="margin-top:16px">Especificaciones (opcional)</div>
+      <textarea id="especificacionesPlato" class="campo-texto" placeholder="Ej: sin sal, sin cebolla, término del pescado..."></textarea>
+
+      <button class="boton-principal boton-ancho-completo" id="botonAgregarAlCarrito">Agregar pedido</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: CARRITO DE COMPRAS
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalCarrito">
+    <div class="modal modal--carrito">
+      <button class="modal__cerrar" id="cerrarModalCarrito">X</button>
+      <h2 class="titulo-modal">Tu Pedido</h2>
+
+      <div id="articulosCarrito" class="articulos-carrito">
+        <!-- Generado por script.js -->
+      </div>
+
+      <div class="seccion-entrega">
+        <div class="titulo-subseccion">Metodo de entrega</div>
+        <div class="grupo-opciones">
+          <label class="opcion-radio">
+            <input type="radio" name="tipoEntrega" value="local" checked /> Retirar en el local
+          </label>
+          <label class="opcion-radio">
+            <input type="radio" name="tipoEntrega" value="delivery" /> Delivery
+          </label>
+        </div>
+
+        <div id="infoLocalDireccion" class="caja-informacion">
+          Direccion: Av. Huancavelica N.º 834, Chilca, Huancayo - Junin
+        </div>
+
+        <div id="camposDelivery" class="oculto">
+          <div class="fila-ubigeo">
+            <div class="grupo-campo">
+              <label class="etiqueta-campo">Departamento</label>
+              <select id="selectDepartamento" class="campo-select">
+                <option value="">Selecciona departamento...</option>
+              </select>
+            </div>
+            <div class="grupo-campo">
+              <label class="etiqueta-campo">Provincia</label>
+              <select id="selectProvincia" class="campo-select" disabled>
+                <option value="">Selecciona provincia...</option>
+              </select>
+            </div>
+            <div class="grupo-campo">
+              <label class="etiqueta-campo">Distrito</label>
+              <select id="selectDistrito" class="campo-select" disabled>
+                <option value="">Selecciona distrito...</option>
+              </select>
+            </div>
+          </div>
+          <input type="text" class="campo-texto" placeholder="Direccion exacta (calle, numero, etc.)" id="campodireccionEntrega" />
+          <textarea class="campo-texto" placeholder="Referencia del lugar (color de puerta, cerca a...)" id="campoReferenciaLugar"></textarea>
+        </div>
+      </div>
+
+      <div class="resumen-totales">
+        <div class="fila-total"><span>Subtotal</span><span id="valorSubtotal">S/ 0.00</span></div>
+        <div class="fila-total" id="filaDelivery" style="display:none">
+          <span>Costo de delivery</span><span id="valorDelivery">S/ 5.00</span>
+        </div>
+        <div class="fila-total fila-total--grande"><span>Total a pagar</span><span id="valorTotalPagar">S/ 0.00</span></div>
+      </div>
+
+      <button class="boton-principal boton-ancho-completo" id="botonPagarAhora">Pagar ahora</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: LOGIN / REGISTRO
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalAutenticacion">
+    <div class="modal modal--autenticacion">
+      <button class="modal__cerrar" id="cerrarModalAutenticacion">X</button>
+      <div class="logo-login">El Abalón</div>
+      <h2>Registrate</h2>
+      <p class="subtitulo-login">Para continuar con tu pedido</p>
+
+      <button class="boton-red-social boton-google" id="botonLoginGoogle">
+        <svg width="18" height="18" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.29-8.16 2.29-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Continuar con Google
+      </button>
+
+      <button class="boton-red-social boton-facebook" id="botonLoginFacebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+        </svg>
+        Continuar con Facebook
+      </button>
+
+      <button class="boton-red-social boton-cuenta" id="botonYaTengoCuenta">Ya tengo cuenta</button>
+
+      <div id="formularioInicioSesion" class="oculto formulario-login">
+        <input type="email"    class="campo-texto" placeholder="Correo electronico" id="campoCorreoLogin" />
+        <input type="password" class="campo-texto" placeholder="Contrasena"         id="campoContrasenaLogin" />
+        <button class="boton-principal boton-ancho-completo" id="botonConfirmarLogin">Ingresar</button>
+      </div>
+
+      <div class="enlaces-login">
+        <a href="#" id="enlaceCrearCuenta">Crear nueva cuenta</a>
+        <a href="#" id="enlaceRecuperarContrasena">Recuperar contrasena</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: SELECCION DE PAGO
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalPago">
+    <div class="modal modal--pago">
+      <button class="modal__cerrar" id="cerrarModalPago">X</button>
+      <h2 class="titulo-modal">Metodo de Pago</h2>
+
+      <div class="titulo-subseccion">Seleccione el tipo de pago</div>
+      <div class="tarjetas-opcion" id="opcionesDePago">
+        <label class="tarjeta-opcion"><input type="radio" name="metodoPago" value="tarjeta" /> <span>Tarjeta</span></label>
+        <label class="tarjeta-opcion"><input type="radio" name="metodoPago" value="yape"    /> <span>Yape</span></label>
+        <label class="tarjeta-opcion"><input type="radio" name="metodoPago" value="efectivo"/> <span>Efectivo</span></label>
+      </div>
+
+      <div class="titulo-subseccion" style="margin-top:24px">Seleccione el tipo de comprobante</div>
+      <div class="tarjetas-opcion" id="opcionesDeComprobante">
+        <label class="tarjeta-opcion"><input type="radio" name="tipoComprobante" value="boleta"  /> <span>Boleta</span></label>
+        <label class="tarjeta-opcion"><input type="radio" name="tipoComprobante" value="factura" /> <span>Factura</span></label>
+      </div>
+
+      <div class="botones-pago">
+        <button class="boton-secundario" id="botonVolverAlMenu">Volver al Menu</button>
+        <button class="boton-principal"  id="botonRealizarPago">Realizar Pago</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: PAGO EXITOSO
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalPagoExitoso">
+    <div class="modal modal--exito">
+      <div class="icono-exito">OK</div>
+      <h2>Pago Exitoso</h2>
+      <p>Tu pedido ha sido registrado. Pronto lo recibirás.</p>
+      <button class="boton-principal" id="botonAceptarPago">OK</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: RESERVAS PASO 1 — Fecha y Hora
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalReservasPaso1">
+    <div class="modal modal--reservas">
+      <button class="modal__cerrar" id="cerrarReservasPaso1">X</button>
+      <h2 class="titulo-modal">Selecciona Fecha y Hora</h2>
+
+      <div class="cabecera-calendario">
+        <button class="boton-navegacion-cal" id="mesAnterior">&#8249;</button>
+        <span id="etiquetaMesAnio"></span>
+        <button class="boton-navegacion-cal" id="mesSiguiente">&#8250;</button>
+      </div>
+
+      <div class="grilla-calendario" id="grillaCalendario">
+        <!-- Generado por script.js -->
+      </div>
+
+      <div class="etiqueta-fecha-seleccionada" id="etiquetaFechaSeleccionada">Ningun dia seleccionado</div>
+
+      <div class="titulo-subseccion" style="margin-top:20px">Hora de la reserva</div>
+      <div class="contenedor-horarios" id="contenedorHorarios">
+        <!-- Generado por script.js -->
+      </div>
+
+      <button class="boton-principal boton-ancho-completo" id="botonContinuarReserva" disabled>Continuar</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: RESERVAS PASO 2 — Mesa y Datos
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalReservasPaso2">
+    <div class="modal modal--reservas modal--reservas-paso2">
+      <button class="modal__cerrar" id="cerrarReservasPaso2">X</button>
+      <h2 class="titulo-modal">Selecciona tu Mesa</h2>
+
+      <div class="resumen-reserva" id="resumenReserva"></div>
+
+      <div class="titulo-subseccion">Croquis del local</div>
+      <div class="mapa-restaurante" id="mapaRestaurante">
+        <!-- Generado por script.js -->
+      </div>
+      <p class="leyenda-mapa">Capacidad: 4 personas por mesa — Haz clic para seleccionar</p>
+      <div class="info-mesa-seleccionada" id="infoMesaSeleccionada">Ninguna mesa seleccionada</div>
+
+      <div class="formulario-reserva">
+        <input type="text"  class="campo-texto" placeholder="Nombre del titular *"   id="campoNombreTitular"  />
+        <input type="tel"   class="campo-texto" placeholder="Numero de celular *"    id="campoCelularTitular" />
+        <input type="email" class="campo-texto" placeholder="Correo electronico *"   id="campoCorreoTitular"  />
+        <input type="text"  class="campo-texto" placeholder="Motivo (opcional)"      id="campoMotivoReserva"  />
+        <textarea           class="campo-texto" placeholder="Sugerencias (opcional)" id="campoSugerencias"    ></textarea>
+      </div>
+
+      <button class="boton-principal boton-ancho-completo" id="botonConfirmarReserva">Reservar</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL: RESERVA CONFIRMADA
+  ══════════════════════════════════════════ -->
+  <div class="capa-fondo oculto" id="modalReservaExitosa">
+    <div class="modal modal--exito">
+      <div class="icono-exito">OK</div>
+      <h2>Reserva Confirmada</h2>
+      <p id="textoReservaExitosa"></p>
+      <button class="boton-principal" id="botonAceptarReserva">OK</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       NOTIFICACION FLOTANTE (TOAST)
+  ══════════════════════════════════════════ -->
+  <div class="notificacion-flotante oculto" id="notificacionFlotante"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1121 @@
+
+/* ─── VARIABLES GLOBALES ─────────────────────────── */
+:root {
+  --color-dorado:         #c9a14a;
+  --color-dorado-claro:   #e6c578;
+  --color-dorado-oscuro:  #9a7730;
+  --color-fondo:          #080d14;
+  --color-fondo-tarjeta:  #0e1620;
+  --color-fondo-modal:    #0b1219;
+  --color-fondo-overlay:  rgba(0,0,0,0.88);
+  --color-superficie:     #131e2a;
+  --color-superficie2:    #1a2737;
+  --color-texto:          #e8f0f8;
+  --color-texto-suave:    #7a90a8;
+  --color-texto-tenue:    #3d5266;
+  --color-peligro:        #c0392b;
+  --color-exito:          #27ae60;
+  --color-info:           #2980b9;
+  --radio-borde:          14px;
+  --radio-borde-sm:       8px;
+  --fuente-display:       'Cormorant Garamond', Georgia, serif;
+  --fuente-cuerpo:        'DM Sans', system-ui, sans-serif;
+  --transicion:           0.22s cubic-bezier(0.4,0,0.2,1);
+  --sombra:               0 8px 40px rgba(0,0,0,0.6);
+  --brillo-dorado:        0 0 24px rgba(201,161,74,0.18);
+}
+
+/* ─── RESET Y BASE ───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 17px; }
+
+body {
+  font-family:            var(--fuente-cuerpo);
+  font-size:              1rem;
+  background-color:       var(--color-fondo);
+  color:                  var(--color-texto);
+  min-height:             100vh;
+  line-height:            1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.oculto { display: none !important; }
+
+/* ─── BARRA DE NAVEGACION ────────────────────────── */
+.barra-navegacion {
+  position:       sticky;
+  top:            0;
+  z-index:        100;
+  display:        flex;
+  align-items:    center;
+  justify-content:space-between;
+  padding:        0 36px;
+  height:         74px;
+  background:     rgba(8,13,20,0.96);
+  backdrop-filter:blur(14px);
+  border-bottom:  1px solid rgba(201,161,74,0.2);
+  box-shadow:     0 2px 24px rgba(0,0,0,0.5);
+}
+
+.barra-navegacion__logo {
+  display:        flex;
+  flex-direction: column;
+  gap:            1px;
+}
+
+.logo-texto {
+  font-family:    var(--fuente-display);
+  font-size:      1.7rem;
+  font-weight:    700;
+  color:          var(--color-dorado);
+  letter-spacing: 0.5px;
+  line-height:    1;
+}
+
+.logo-subtitulo {
+  font-size:      0.72rem;
+  color:          var(--color-texto-suave);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.barra-navegacion__pestanas {
+  display:       flex;
+  gap:           4px;
+  background:    var(--color-superficie);
+  padding:       5px;
+  border-radius: 50px;
+}
+
+.boton-pestana {
+  background:     transparent;
+  border:         none;
+  color:          var(--color-texto-suave);
+  font-family:    var(--fuente-cuerpo);
+  font-size:      0.95rem;
+  font-weight:    500;
+  padding:        8px 22px;
+  border-radius:  50px;
+  cursor:         pointer;
+  transition:     var(--transicion);
+}
+
+.boton-pestana:hover  { color: var(--color-texto); }
+.boton-pestana.activo {
+  background:  var(--color-dorado);
+  color:       #080d14;
+  font-weight: 700;
+}
+
+.boton-carrito {
+  position:       relative;
+  background:     var(--color-superficie);
+  border:         1px solid rgba(201,161,74,0.3);
+  color:          var(--color-dorado);
+  width:          46px;
+  height:         46px;
+  border-radius:  50%;
+  display:        flex;
+  align-items:    center;
+  justify-content:center;
+  cursor:         pointer;
+  transition:     var(--transicion);
+}
+
+.boton-carrito:hover {
+  background:    var(--color-dorado);
+  color:         #080d14;
+  border-color:  var(--color-dorado);
+  box-shadow:    var(--brillo-dorado);
+}
+
+.contador-carrito {
+  position:      absolute;
+  top:           -5px;
+  right:         -5px;
+  background:    var(--color-peligro);
+  color:         #fff;
+  font-size:     0.7rem;
+  font-weight:   700;
+  width:         19px;
+  height:        19px;
+  border-radius: 50%;
+  display:       flex;
+  align-items:   center;
+  justify-content:center;
+  border:        2px solid var(--color-fondo);
+}
+
+/* ─── SECCIONES ──────────────────────────────────── */
+.seccion {
+  max-width: 1240px;
+  margin:    0 auto;
+  padding:   52px 28px;
+}
+
+.cabecera-seccion {
+  text-align:    center;
+  margin-bottom: 44px;
+}
+
+.cabecera-seccion h1 {
+  font-family:   var(--fuente-display);
+  font-size:     clamp(2.2rem, 5vw, 3.5rem);
+  font-weight:   600;
+  color:         var(--color-dorado);
+  margin-bottom: 8px;
+  letter-spacing:1px;
+}
+
+.cabecera-seccion p {
+  color:     var(--color-texto-suave);
+  font-size: 1.05rem;
+}
+
+/* ─── BARRA DE CATEGORIAS ────────────────────────── */
+.barra-categorias {
+  display:        flex;
+  gap:            10px;
+  flex-wrap:      wrap;
+  margin-bottom:  32px;
+  justify-content:center;
+}
+
+.pastilla-categoria {
+  background:     var(--color-superficie);
+  border:         1px solid rgba(201,161,74,0.18);
+  color:          var(--color-texto-suave);
+  border-radius:  50px;
+  padding:        8px 20px;
+  font-size:      0.92rem;
+  font-weight:    500;
+  cursor:         pointer;
+  transition:     var(--transicion);
+}
+
+.pastilla-categoria:hover      { color: var(--color-texto); border-color: rgba(201,161,74,0.45); }
+.pastilla-categoria.activo     { background: var(--color-dorado); color: #080d14; font-weight: 700; border-color: var(--color-dorado); }
+
+/* ─── GRILLA DE PLATOS ───────────────────────────── */
+.grilla-platos {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap:                   26px;
+}
+
+.tarjeta-plato {
+  background:   var(--color-fondo-tarjeta);
+  border:       1px solid rgba(201,161,74,0.12);
+  border-radius:var(--radio-borde);
+  overflow:     hidden;
+  cursor:       pointer;
+  transition:   var(--transicion);
+  box-shadow:   0 4px 20px rgba(0,0,0,0.4);
+}
+
+.tarjeta-plato:hover {
+  transform:    translateY(-5px);
+  border-color: rgba(201,161,74,0.4);
+  box-shadow:   var(--sombra), var(--brillo-dorado);
+}
+
+.tarjeta-plato img {
+  width:       100%;
+  height:      185px;
+  object-fit:  cover;
+  display:     block;
+  transition:  transform 0.4s ease;
+}
+
+.tarjeta-plato:hover img { transform: scale(1.05); }
+
+.tarjeta-plato__cuerpo  { padding: 18px; }
+
+.tarjeta-plato__categoria {
+  font-size:      0.72rem;
+  color:          var(--color-texto-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom:  4px;
+}
+
+.tarjeta-plato__nombre {
+  font-family:   var(--fuente-display);
+  font-size:     1.3rem;
+  font-weight:   600;
+  color:         var(--color-texto);
+  margin-bottom: 5px;
+}
+
+.tarjeta-plato__descripcion {
+  font-size:          0.88rem;
+  color:              var(--color-texto-suave);
+  margin-bottom:      14px;
+  display:            -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:           hidden;
+}
+
+.tarjeta-plato__precio {
+  font-family: var(--fuente-display);
+  font-size:   1.4rem;
+  font-weight: 700;
+  color:       var(--color-dorado);
+}
+
+/* ─── BOTON RESERVA ──────────────────────────────── */
+.contenedor-boton-reserva {
+  display:         flex;
+  justify-content: center;
+  padding:         60px 0;
+}
+
+/* ─── CAPA DE FONDO / OVERLAY ────────────────────── */
+.capa-fondo {
+  position:        fixed;
+  inset:           0;
+  background:      var(--color-fondo-overlay);
+  backdrop-filter: blur(7px);
+  z-index:         500;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  padding:         16px;
+  animation:       aparecerFondo 0.2s ease;
+}
+
+@keyframes aparecerFondo {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── MODALES ────────────────────────────────────── */
+.modal {
+  background:    var(--color-fondo-modal);
+  border:        1px solid rgba(201,161,74,0.2);
+  border-radius: var(--radio-borde);
+  box-shadow:    var(--sombra);
+  position:      relative;
+  animation:     subirModal 0.25s cubic-bezier(0.4,0,0.2,1);
+  max-height:    90vh;
+  overflow-y:    auto;
+  scrollbar-width:thin;
+  scrollbar-color: var(--color-dorado-oscuro) transparent;
+}
+
+.modal::-webkit-scrollbar       { width: 4px; }
+.modal::-webkit-scrollbar-thumb { background: var(--color-dorado-oscuro); border-radius: 4px; }
+
+@keyframes subirModal {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal__cerrar {
+  position:        absolute;
+  top:             14px;
+  right:           14px;
+  background:      var(--color-superficie);
+  border:          1px solid rgba(201,161,74,0.2);
+  color:           var(--color-texto-suave);
+  width:           34px;
+  height:          34px;
+  border-radius:   50%;
+  cursor:          pointer;
+  font-size:       0.75rem;
+  font-weight:     700;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  transition:      var(--transicion);
+  z-index:         10;
+}
+
+.modal__cerrar:hover { color: var(--color-texto); border-color: var(--color-dorado); }
+
+.titulo-modal {
+  font-family:   var(--fuente-display);
+  font-size:     1.8rem;
+  font-weight:   600;
+  color:         var(--color-dorado);
+  margin-bottom: 22px;
+  padding-right: 44px;
+}
+
+/* ─── MODAL PLATO ────────────────────────────────── */
+.modal--plato {
+  width:      100%;
+  max-width:  580px;
+  padding:    30px;
+}
+
+.modal-plato-superior {
+  display:       flex;
+  gap:           22px;
+  margin-bottom: 26px;
+}
+
+.modal-plato-superior img {
+  width:         165px;
+  height:        148px;
+  object-fit:    cover;
+  border-radius: var(--radio-borde-sm);
+  flex-shrink:   0;
+}
+
+.modal-plato-informacion {
+  flex:           1;
+  display:        flex;
+  flex-direction: column;
+  gap:            6px;
+}
+
+.modal-plato-categoria {
+  font-size:      0.75rem;
+  color:          var(--color-texto-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.modal-plato-informacion h2 {
+  font-family: var(--fuente-display);
+  font-size:   1.5rem;
+  font-weight: 600;
+  color:       var(--color-texto);
+}
+
+.modal-plato-informacion p {
+  font-size: 0.88rem;
+  color:     var(--color-texto-suave);
+}
+
+.modal-plato-precio {
+  font-family: var(--fuente-display);
+  font-size:   1.6rem;
+  font-weight: 700;
+  color:       var(--color-dorado);
+  margin-top:  auto;
+}
+
+.fila-cantidad-plato {
+  display:     flex;
+  align-items: center;
+  justify-content:space-between;
+  margin-top:  10px;
+  font-size:   0.9rem;
+  color:       var(--color-texto-suave);
+}
+
+.titulo-subseccion {
+  font-weight:    600;
+  font-size:      0.92rem;
+  color:          var(--color-dorado);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom:  8px;
+}
+
+.subtitulo-subseccion {
+  font-size:     0.85rem;
+  color:         var(--color-texto-suave);
+  margin-bottom: 14px;
+}
+
+/* ─── LISTA DE BEBIDAS ───────────────────────────── */
+.lista-bebidas {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+  max-height:     230px;
+  overflow-y:     auto;
+  padding-right:  4px;
+}
+
+.fila-bebida {
+  display:       flex;
+  align-items:   center;
+  justify-content:space-between;
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.1);
+  border-radius: var(--radio-borde-sm);
+  padding:       11px 15px;
+  gap:           10px;
+}
+
+.fila-bebida__informacion { display: flex; flex-direction: column; flex: 1; }
+.fila-bebida__nombre      { font-size: 0.92rem; color: var(--color-texto); font-weight: 500; }
+.fila-bebida__precio      { font-size: 0.82rem; color: var(--color-dorado); }
+
+/* ─── CONTROL DE CANTIDAD ────────────────────────── */
+.control-cantidad {
+  display:         flex;
+  align-items:     center;
+  gap:             10px;
+  background:      var(--color-fondo);
+  border:          1px solid rgba(201,161,74,0.2);
+  border-radius:   50px;
+  padding:         4px 6px;
+}
+
+.boton-cantidad {
+  background:      none;
+  border:          none;
+  color:           var(--color-dorado);
+  font-size:       1.1rem;
+  width:           28px;
+  height:          28px;
+  border-radius:   50%;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  transition:      var(--transicion);
+}
+
+.boton-cantidad:hover            { background: var(--color-dorado); color: #080d14; }
+.boton-cantidad:disabled         { color: var(--color-texto-tenue); cursor: default; }
+.boton-cantidad:disabled:hover   { background: none; }
+
+.control-cantidad span {
+  min-width:   22px;
+  text-align:  center;
+  font-size:   0.95rem;
+  font-weight: 600;
+  color:       var(--color-texto);
+}
+
+/* ─── CAMPOS DE TEXTO Y SELECTS ──────────────────── */
+.campo-texto,
+.campo-select {
+  width:         100%;
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.15);
+  border-radius: var(--radio-borde-sm);
+  color:         var(--color-texto);
+  font-family:   var(--fuente-cuerpo);
+  font-size:     0.95rem;
+  padding:       11px 15px;
+  outline:       none;
+  transition:    var(--transicion);
+  margin-top:    8px;
+}
+
+.campo-texto::placeholder  { color: var(--color-texto-tenue); }
+.campo-select              { resize: none; cursor: pointer; }
+.campo-select option       { background: var(--color-superficie2); }
+
+.campo-texto:focus,
+.campo-select:focus {
+  border-color: var(--color-dorado);
+  background:   var(--color-superficie2);
+  box-shadow:   0 0 0 3px rgba(201,161,74,0.1);
+}
+
+textarea.campo-texto { min-height: 75px; resize: vertical; }
+
+/* ─── BOTONES ────────────────────────────────────── */
+.boton-principal {
+  background:     var(--color-dorado);
+  color:          #080d14;
+  border:         none;
+  border-radius:  var(--radio-borde-sm);
+  padding:        13px 26px;
+  font-family:    var(--fuente-cuerpo);
+  font-weight:    700;
+  font-size:      0.97rem;
+  cursor:         pointer;
+  transition:     var(--transicion);
+  letter-spacing: 0.03em;
+}
+
+.boton-principal:hover {
+  background:  var(--color-dorado-claro);
+  box-shadow:  0 4px 18px rgba(201,161,74,0.4);
+}
+
+.boton-principal:disabled {
+  opacity: 0.4;
+  cursor:  not-allowed;
+}
+
+.boton-secundario {
+  background:    var(--color-superficie);
+  color:         var(--color-texto-suave);
+  border:        1px solid rgba(201,161,74,0.2);
+  border-radius: var(--radio-borde-sm);
+  padding:       13px 26px;
+  font-family:   var(--fuente-cuerpo);
+  font-weight:   500;
+  font-size:     0.97rem;
+  cursor:        pointer;
+  transition:    var(--transicion);
+}
+
+.boton-secundario:hover { color: var(--color-texto); border-color: var(--color-dorado); }
+
+.boton-ancho-completo { width: 100%; margin-top: 18px; }
+
+/* ─── MODAL CARRITO ──────────────────────────────── */
+.modal--carrito {
+  width:      100%;
+  max-width:  520px;
+  padding:    30px;
+}
+
+.articulos-carrito {
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+  margin-bottom:  22px;
+}
+
+.articulo-carrito {
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.1);
+  border-radius: var(--radio-borde-sm);
+  padding:       13px 15px;
+  display:       flex;
+  flex-direction:column;
+  gap:           9px;
+}
+
+.articulo-carrito__cabecera {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     flex-start;
+  gap:             12px;
+}
+
+.articulo-carrito__nombre {
+  font-weight: 600;
+  font-size:   0.97rem;
+  color:       var(--color-texto);
+}
+
+.articulo-carrito__precio {
+  font-family:  var(--fuente-display);
+  color:        var(--color-dorado);
+  font-size:    1.05rem;
+  font-weight:  700;
+  white-space:  nowrap;
+}
+
+.articulo-carrito__extras {
+  font-size: 0.82rem;
+  color:     var(--color-texto-suave);
+}
+
+.articulo-carrito__controles {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-top:      4px;
+}
+
+.boton-eliminar {
+  background:  none;
+  border:      none;
+  color:       var(--color-peligro);
+  font-size:   0.82rem;
+  cursor:      pointer;
+  padding:     0;
+  transition:  var(--transicion);
+}
+
+.boton-eliminar:hover { text-decoration: underline; }
+
+/* ─── UBIGEO DELIVERY ────────────────────────────── */
+.seccion-entrega  { margin-top: 14px; }
+
+.grupo-opciones {
+  display:       flex;
+  gap:           14px;
+  margin-bottom: 14px;
+  flex-wrap:     wrap;
+}
+
+.opcion-radio {
+  display:     flex;
+  align-items: center;
+  gap:         7px;
+  cursor:      pointer;
+  font-size:   0.95rem;
+  color:       var(--color-texto-suave);
+  transition:  var(--transicion);
+}
+
+.opcion-radio:hover      { color: var(--color-texto); }
+.opcion-radio input      { accent-color: var(--color-dorado); }
+
+.caja-informacion {
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.15);
+  border-radius: var(--radio-borde-sm);
+  padding:       11px 15px;
+  font-size:     0.9rem;
+  color:         var(--color-texto-suave);
+}
+
+.fila-ubigeo {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   10px;
+}
+
+.grupo-campo { display: flex; flex-direction: column; }
+
+.etiqueta-campo {
+  font-size:      0.78rem;
+  color:          var(--color-texto-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom:  2px;
+  padding-left:   2px;
+}
+
+/* ─── RESUMEN DE TOTALES ─────────────────────────── */
+.resumen-totales {
+  margin-top:    20px;
+  border-top:    1px solid rgba(201,161,74,0.15);
+  padding-top:   16px;
+  display:       flex;
+  flex-direction:column;
+  gap:           9px;
+}
+
+.fila-total {
+  display:         flex;
+  justify-content: space-between;
+  font-size:       0.95rem;
+  color:           var(--color-texto-suave);
+}
+
+.fila-total--grande {
+  font-size:   1.1rem;
+  font-weight: 700;
+  color:       var(--color-dorado);
+  margin-top:  6px;
+  padding-top: 10px;
+  border-top:  1px solid rgba(201,161,74,0.15);
+}
+
+/* ─── MODAL AUTENTICACION ────────────────────────── */
+.modal--autenticacion {
+  width:       100%;
+  max-width:   390px;
+  padding:     38px 30px;
+  text-align:  center;
+}
+
+.logo-login {
+  font-family:    var(--fuente-display);
+  font-size:      1.4rem;
+  color:          var(--color-dorado);
+  font-weight:    700;
+  margin-bottom:  18px;
+}
+
+.modal--autenticacion h2 {
+  font-family:   var(--fuente-display);
+  font-size:     2.1rem;
+  font-weight:   600;
+  color:         var(--color-texto);
+  margin-bottom: 4px;
+}
+
+.subtitulo-login {
+  font-size:     0.9rem;
+  color:         var(--color-texto-suave);
+  margin-bottom: 26px;
+}
+
+.boton-red-social {
+  width:           100%;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             10px;
+  padding:         12px;
+  border-radius:   var(--radio-borde-sm);
+  font-family:     var(--fuente-cuerpo);
+  font-size:       0.95rem;
+  font-weight:     600;
+  cursor:          pointer;
+  transition:      var(--transicion);
+  margin-bottom:   10px;
+}
+
+.boton-google   { background: #fff; color: #333; border: 1px solid #dadce0; }
+.boton-google:hover   { background: #f8f8f8; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.boton-facebook { background: #1877f2; color: #fff; border: none; }
+.boton-facebook:hover { background: #166fe5; }
+.boton-cuenta   { background: var(--color-superficie); color: var(--color-texto); border: 1px solid rgba(201,161,74,0.2); }
+.boton-cuenta:hover   { border-color: var(--color-dorado); }
+
+.formulario-login {
+  margin-top:     18px;
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+.enlaces-login {
+  display:        flex;
+  flex-direction: column;
+  gap:            9px;
+  margin-top:     18px;
+}
+
+.enlaces-login a {
+  color:      var(--color-dorado);
+  font-size:  0.9rem;
+  text-decoration: none;
+  transition: var(--transicion);
+}
+
+.enlaces-login a:hover { color: var(--color-dorado-claro); text-decoration: underline; }
+
+/* ─── MODAL PAGO ─────────────────────────────────── */
+.modal--pago {
+  width:      100%;
+  max-width:  460px;
+  padding:    30px;
+}
+
+.tarjetas-opcion { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.tarjeta-opcion {
+  flex:            1;
+  min-width:       105px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             8px;
+  background:      var(--color-superficie);
+  border:          2px solid rgba(201,161,74,0.15);
+  border-radius:   var(--radio-borde-sm);
+  padding:         15px 10px;
+  cursor:          pointer;
+  font-size:       0.95rem;
+  color:           var(--color-texto-suave);
+  transition:      var(--transicion);
+  text-align:      center;
+}
+
+.tarjeta-opcion:has(input:checked) {
+  border-color: var(--color-dorado);
+  background:   rgba(201,161,74,0.08);
+  color:        var(--color-dorado);
+}
+
+.tarjeta-opcion input   { display: none; }
+.tarjeta-opcion span    { font-weight: 500; }
+
+.botones-pago {
+  display:    flex;
+  gap:        12px;
+  margin-top: 30px;
+}
+
+.botones-pago .boton-secundario,
+.botones-pago .boton-principal  { flex: 1; }
+
+/* ─── MODAL EXITO ────────────────────────────────── */
+.modal--exito {
+  width:       100%;
+  max-width:   350px;
+  padding:     52px 30px;
+  text-align:  center;
+}
+
+.icono-exito {
+  font-size:     1.1rem;
+  font-weight:   700;
+  background:    var(--color-dorado);
+  color:         #080d14;
+  width:         56px;
+  height:        56px;
+  border-radius: 50%;
+  display:       flex;
+  align-items:   center;
+  justify-content:center;
+  margin:        0 auto 18px;
+}
+
+.modal--exito h2 {
+  font-family:   var(--fuente-display);
+  font-size:     1.9rem;
+  font-weight:   600;
+  color:         var(--color-texto);
+  margin-bottom: 10px;
+}
+
+.modal--exito p {
+  font-size:     0.95rem;
+  color:         var(--color-texto-suave);
+  margin-bottom: 26px;
+}
+
+/* ─── MODAL RESERVAS ─────────────────────────────── */
+.modal--reservas       { width: 100%; max-width: 560px; padding: 30px; }
+.modal--reservas-paso2 { max-width: 620px; }
+
+/* Calendario */
+.cabecera-calendario {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-bottom:   16px;
+}
+
+.cabecera-calendario span {
+  font-family:    var(--fuente-display);
+  font-size:      1.15rem;
+  font-weight:    600;
+  color:          var(--color-texto);
+  text-transform: capitalize;
+}
+
+.boton-navegacion-cal {
+  background:      var(--color-superficie);
+  border:          1px solid rgba(201,161,74,0.2);
+  color:           var(--color-dorado);
+  width:           34px;
+  height:          34px;
+  border-radius:   50%;
+  cursor:          pointer;
+  font-size:       1.2rem;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  transition:      var(--transicion);
+}
+
+.boton-navegacion-cal:hover { background: var(--color-dorado); color: #080d14; }
+
+.grilla-calendario {
+  display:               grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:                   4px;
+  margin-bottom:         14px;
+}
+
+.dia-semana-cabecera {
+  text-align:     center;
+  font-size:      0.74rem;
+  color:          var(--color-texto-tenue);
+  padding:        4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.celda-dia {
+  aspect-ratio:    1;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  border-radius:   50%;
+  font-size:       0.88rem;
+  cursor:          pointer;
+  transition:      var(--transicion);
+  color:           var(--color-texto-suave);
+  border:          1px solid transparent;
+}
+
+.celda-dia:hover:not(.celda-dia--deshabilitado):not(.celda-dia--vacio) {
+  background: rgba(201,161,74,0.15);
+  color:      var(--color-texto);
+}
+
+.celda-dia--seleccionado  { background: var(--color-dorado); color: #080d14; font-weight: 700; }
+.celda-dia--deshabilitado { color: var(--color-texto-tenue); cursor: not-allowed; opacity: 0.45; }
+.celda-dia--hoy           { border-color: var(--color-dorado); color: var(--color-dorado); }
+.celda-dia--vacio         { pointer-events: none; }
+
+.etiqueta-fecha-seleccionada {
+  text-align: center;
+  font-size:  0.9rem;
+  color:      var(--color-dorado);
+  margin-top: 8px;
+}
+
+/* Horarios */
+.contenedor-horarios {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+  gap:                   8px;
+  max-height:            190px;
+  overflow-y:            auto;
+  padding:               4px 0;
+  margin-bottom:         18px;
+}
+
+.pastilla-horario {
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.15);
+  border-radius: var(--radio-borde-sm);
+  padding:       9px;
+  text-align:    center;
+  font-size:     0.85rem;
+  cursor:        pointer;
+  transition:    var(--transicion);
+  color:         var(--color-texto-suave);
+}
+
+.pastilla-horario:hover                { border-color: var(--color-dorado); color: var(--color-texto); }
+.pastilla-horario--seleccionado        { background: var(--color-dorado); color: #080d14; font-weight: 700; border-color: var(--color-dorado); }
+.pastilla-horario--reservado           { background: rgba(192,57,43,0.15); color: var(--color-peligro); border-color: rgba(192,57,43,0.3); cursor: not-allowed; }
+.pastilla-horario--activo              { background: rgba(41,128,185,0.15); color: var(--color-info); border-color: rgba(41,128,185,0.3); cursor: not-allowed; }
+
+/* Resumen de reserva */
+.resumen-reserva {
+  background:    var(--color-superficie);
+  border-left:   3px solid var(--color-dorado);
+  border-radius: 0 var(--radio-borde-sm) var(--radio-borde-sm) 0;
+  padding:       11px 16px;
+  font-size:     0.9rem;
+  color:         var(--color-texto-suave);
+  margin-bottom: 22px;
+}
+
+.resumen-reserva strong { color: var(--color-dorado); }
+
+/* Leyenda de disponibilidad */
+.leyenda-disponibilidad {
+  display:    flex;
+  gap:        16px;
+  margin-bottom: 14px;
+  flex-wrap:  wrap;
+}
+
+.leyenda-item {
+  display:     flex;
+  align-items: center;
+  gap:         5px;
+  font-size:   0.8rem;
+  color:       var(--color-texto-suave);
+}
+
+.leyenda-punto            { width: 10px; height: 10px; border-radius: 50%; }
+.leyenda-punto--rojo      { background: var(--color-peligro); }
+.leyenda-punto--azul      { background: var(--color-info); }
+.leyenda-punto--verde     { background: var(--color-exito); }
+
+/* Mapa del restaurante */
+.mapa-restaurante {
+  background:    var(--color-superficie);
+  border:        1px solid rgba(201,161,74,0.15);
+  border-radius: var(--radio-borde-sm);
+  padding:       22px;
+  display:       grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:           12px;
+  margin-bottom: 8px;
+}
+
+.mesa-del-mapa {
+  aspect-ratio:    1;
+  background:      var(--color-fondo-tarjeta);
+  border:          2px solid rgba(201,161,74,0.2);
+  border-radius:   9px;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  cursor:          pointer;
+  transition:      var(--transicion);
+  font-size:       0.75rem;
+  color:           var(--color-texto-tenue);
+  gap:             4px;
+}
+
+.mesa-del-mapa:hover {
+  border-color: var(--color-dorado);
+  color:        var(--color-texto);
+  background:   rgba(201,161,74,0.05);
+}
+
+.mesa-del-mapa--seleccionada {
+  border-color: var(--color-dorado);
+  background:   rgba(201,161,74,0.15);
+  color:        var(--color-dorado);
+  font-weight:  600;
+}
+
+.mesa-numero { font-size: 0.72rem; }
+
+.leyenda-mapa {
+  font-size:     0.78rem;
+  color:         var(--color-texto-tenue);
+  text-align:    center;
+  margin-bottom: 14px;
+}
+
+.info-mesa-seleccionada {
+  text-align:    center;
+  font-size:     0.9rem;
+  color:         var(--color-dorado);
+  margin-bottom: 18px;
+  min-height:    22px;
+}
+
+.formulario-reserva {
+  display:        flex;
+  flex-direction: column;
+  gap:            4px;
+  margin-bottom:  4px;
+}
+
+/* ─── NOTIFICACION FLOTANTE ──────────────────────── */
+.notificacion-flotante {
+  position:   fixed;
+  bottom:     30px;
+  left:       50%;
+  transform:  translateX(-50%) translateY(80px);
+  background: var(--color-dorado);
+  color:      #080d14;
+  padding:    13px 26px;
+  border-radius:50px;
+  font-weight: 700;
+  font-size:   0.95rem;
+  z-index:     9999;
+  box-shadow:  0 4px 22px rgba(201,161,74,0.5);
+  transition:  transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity:     0;
+  white-space: nowrap;
+}
+
+.notificacion-flotante.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity:   1;
+}
+
+/* ─── CARRITO VACIO / ESTADOS ────────────────────── */
+.carrito-vacio,
+.mensaje-cargando,
+.mensaje-error {
+  text-align: center;
+  padding:    36px 0;
+  font-size:  0.95rem;
+}
+
+.carrito-vacio  { color: var(--color-texto-tenue); }
+.mensaje-cargando{ color: var(--color-texto-suave); }
+.mensaje-error  { color: #e74c3c; }
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 640px) {
+  html { font-size: 15px; }
+
+  .barra-navegacion { padding: 0 16px; }
+  .modal-plato-superior { flex-direction: column; }
+  .modal-plato-superior img { width: 100%; height: 200px; }
+  .botones-pago { flex-direction: column-reverse; }
+  .mapa-restaurante { grid-template-columns: repeat(3, 1fr); }
+  .seccion { padding: 32px 16px; }
+  .modal--plato, .modal--carrito,
+  .modal--reservas, .modal--pago { padding: 20px 16px; }
+  .fila-ubigeo { grid-template-columns: 1fr; }
+}
